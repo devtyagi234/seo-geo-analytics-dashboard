@@ -173,8 +173,12 @@ try:
     seo_raw = get_seo_data()
     geo_raw = get_geo_data()
 except Exception as e:
+    import os
     st.error(f"Error loading datasets: {e}")
-    st.info("Make sure you execute `data_generator.py` and `data_processor.py` prior to launching this app.")
+    st.info(f"**Diagnostic Info:**")
+    st.write(f"- **Current Working Directory:** `{os.getcwd()}`")
+    st.write(f"- **Dashboard Script Path:** `{os.path.abspath(__file__)}`")
+    st.write(f"- **Data Directory Contents:** `{os.listdir('data') if os.path.exists('data') else 'data directory not found'}`")
     st.stop()
 
 # ----------------- SIDEBAR FILTER PANELS -----------------

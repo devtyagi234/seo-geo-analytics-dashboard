@@ -2,7 +2,14 @@ import os
 import pandas as pd
 import numpy as np
 
-def load_clean_seo_data(filepath="data/seo_data.csv"):
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+def load_clean_seo_data(filepath=None):
+    if filepath is None:
+        filepath = os.path.join(BASE_DIR, "data", "seo_data.csv")
+    elif not os.path.isabs(filepath):
+        filepath = os.path.join(BASE_DIR, filepath)
+        
     if not os.path.exists(filepath):
         raise FileNotFoundError(f"Source file {filepath} not found. Please run data_generator.py first.")
     
@@ -62,7 +69,12 @@ def load_clean_seo_data(filepath="data/seo_data.csv"):
     
     return df
 
-def load_clean_geo_data(filepath="data/geo_citations.csv"):
+def load_clean_geo_data(filepath=None):
+    if filepath is None:
+        filepath = os.path.join(BASE_DIR, "data", "geo_citations.csv")
+    elif not os.path.isabs(filepath):
+        filepath = os.path.join(BASE_DIR, filepath)
+        
     if not os.path.exists(filepath):
         raise FileNotFoundError(f"Source file {filepath} not found. Please run data_generator.py first.")
     
